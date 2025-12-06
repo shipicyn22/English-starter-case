@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Английский с нуля — полный кейс для начинающих</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #020617;
+            color: #e5e7eb;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            background: radial-gradient(circle at top, #1d4ed8, #020617 60%);
+            padding: 20px 16px 28px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+            backdrop-filter: blur(18px);
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 16px 40px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #93c5fd;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        nav a {
+            font-size: 13px;
+            padding: 6px 11px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            background: rgba(15, 23, 42, 0.7);
+            color: #e5e7eb;
+            transition: 0.15s ease;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            border-color: #38bdf8;
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .hero {
+            margin-top: 18px;
+        }
+
+        .hero-title {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 15px;
+            color: #cbd5f5;
+            max-width: 720px;
+        }
+
+        .hero-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .hero-pill {
+            font-size: 11px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(129, 140, 248, 0.8);
+            background: rgba(15, 23, 42, 0.85);
+            color: #e5e7eb;
+        }
+
+        main {
+            padding-top: 20px;
+        }
+
+        section {
+            margin-top: 40px;
+        }
+
+        section h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        section p.section-desc {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.96);
+            border-radius: 16px;
+            padding: 14px 16px 16px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+        }
+
+        .card h3 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .card small {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        li {
+            font-size: 14px;
+            margin-bottom: 4px;
+            position: relative;
+            padding-left: 14px;
+        }
+
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #38bdf8;
+            font-size: 14px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+            gap: 18px;
+        }
+
+        .two-col-wide {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+            gap: 18px;
+        }
+
+        @media (max-width: 900px) {
+            .two-col,
+            .two-col-wide {
+                grid-template-columns: 1fr;
+            }
+
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                justify-content: flex-start;
+            }
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(30, 64, 175, 0.4);
+            color: #93c5fd;
+            margin-top: 4px;
+        }
+
+        .tag span {
+            font-size: 16px;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .pill {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(15, 118, 110, 0.3);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+
+        pre.example {
+            margin-top: 8px;
+            padding: 8px;
+            font-size: 13px;
+            border-radius: 10px;
+            background: #020617;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .table-wrap {
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+
+        .plan-table,
+        .alpha-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .plan-table th,
+        .plan-table td,
+        .alpha-table th,
+        .alpha-table td {
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            padding: 6px 8px;
+            text-align: left;
+        }
+
+        .plan-table th,
+        .alpha-table th {
+            background: rgba(30, 64, 175, 0.7);
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 999px;
+            background: rgba(30, 64, 175, 0.4);
+            border: 1px solid rgba(59, 130, 246, 0.6);
+            margin-left: 4px;
+        }
+
+        .flashcards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .flashcard {
+            position: relative;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: radial-gradient(circle at top, #1d4ed8, #020617 55%);
+            font-size: 13px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+            min-height: 56px;
+        }
+
+        .flashcard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.9);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .flashcard-back {
+            opacity: 0;
+        }
+
+        .flashcard.flipped .flashcard-front {
+            opacity: 0;
+        }
+
+        .flashcard.flipped .flashcard-back {
+            opacity: 1;
+        }
+
+        .flashcard-hint {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 6px;
+        }
+
+        .subheading {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #64748b;
+            margin-bottom: 2px;
+        }
+
+        footer {
+            border-top: 1px solid rgba(148, 163, 184, 0.35);
+            padding: 16px;
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container header-top">
+        <div>
+            <div class="logo">Starter English Case — Full</div>
+            <div class="tag">
+                <span>★</span>
+                Полный продукт по английскому с нуля
+            </div>
+        </div>
+        <nav>
+            <a href="#alphabet">Алфавит</a>
+            <a href="#words">Словарь</a>
+            <a href="#grammar">Грамматика</a>
+            <a href="#dialogs">Диалоги</a>
+            <a href="#flashcards">Карточки</a>
+            <a href="#plan">План 3 месяца</a>
+            <a href="#mistakes">Ошибки</a>
+        </nav>
+    </div>
+    <div class="container hero">
+        <h1 class="hero-title">Английский с нуля: расширенный онлайн-кейс для новичка</h1>
+        <p class="hero-subtitle">
+            На странице собраны все ключевые блоки продукта: полный алфавит, тематический словарь, базовая и расширенная
+            грамматика, готовые диалоги, набор карточек, подробный план обучения на 3 месяца и систематизированные типичные ошибки.
+        </p>
+        <div class="hero-pills">
+            <span class="hero-pill">Алфавит + произношение</span>
+            <span class="hero-pill">350+ слов по темам</span>
+            <span class="hero-pill">Основная грамматика A1</span>
+            <span class="hero-pill">20+ диалогов</span>
+            <span class="hero-pill">Карточки слов</span>
+            <span class="hero-pill">Пошаговый план</span>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- 1. Alphabet -->
+    <section id="alphabet">
+        <h2>1. Алфавит и произношение</h2>
+        <p class="section-desc">
+            Раздел используется в первую неделю обучения. Внутри — полный английский алфавит, базовые примеры,
+            транскрипция и мини-упражнения на чтение и слух.
+        </p>
+
+        <div class="two-col-wide">
+            <div class="card">
+                <h3>Полная таблица букв с примерами</h3>
+                <div class="table-wrap">
+                    <table class="alpha-table">
+                        <thead>
+                        <tr>
+                            <th>Буква</th>
+                            <th>Произношение (пример)</th>
+                            <th>Пример слова</th>
+                            <th>Перевод</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr><td>A</td><td>/eɪ/</td><td>apple</td><td>яблоко</td></tr>
+                        <tr><td>B</td><td>/biː/</td><td>book</td><td>книга</td></tr>
+                        <tr><td>C</td><td>/siː/</td><td>cat</td><td>кот</td></tr>
+                        <tr><td>D</td><td>/diː/</td><td>door</td><td>дверь</td></tr>
+                        <tr><td>E</td><td>/iː/</td><td>egg</td><td>яйцо</td></tr>
+                        <tr><td>F</td><td>/ef/</td><td>friend</td><td>друг</td></tr>
+                        <tr><td>G</td><td>/dʒiː/</td><td>game</td><td>игра</td></tr>
+                        <tr><td>H</td><td>/eɪtʃ/</td><td>house</td><td>дом</td></tr>
+                        <tr><td>I</td><td>/aɪ/</td><td>island</td><td>остров</td></tr>
+                        <tr><td>J</td><td>/dʒeɪ/</td><td>job</td><td>работа</td></tr>
+                        <tr><td>K</td><td>/keɪ/</td><td>key</td><td>ключ</td></tr>
+                        <tr><td>L</td><td>/el/</td><td>lamp</td><td>лампа</td></tr>
+                        <tr><td>M</td><td>/em/</td><td>mother</td><td>мама</td></tr>
+                        <tr><td>N</td><td>/en/</td><td>name</td><td>имя</td></tr>
+                        <tr><td>O</td><td>/əʊ/</td><td>orange</td><td>апельсин</td></tr>
+                        <tr><td>P</td><td>/piː/</td><td>pen</td><td>ручка</td></tr>
+                        <tr><td>Q</td><td>/kjuː/</td><td>question</td><td>вопрос</td></tr>
+                        <tr><td>R</td><td>/ɑːr/</td><td>room</td><td>комната</td></tr>
+                        <tr><td>S</td><td>/es/</td><td>sun</td><td>солнце</td></tr>
+                        <tr><td>T</td><td>/tiː/</td><td>table</td><td>стол</td></tr>
+                        <tr><td>U</td><td>/juː/</td><td>umbrella</td><td>зонт</td></tr>
+                        <tr><td>V</td><td>/viː/</td><td>video</td><td>видео</td></tr>
+                        <tr><td>W</td><td>/ˈdʌbljuː/</td><td>window</td><td>окно</td></tr>
+                        <tr><td>X</td><td>/eks/</td><td>box</td><td>коробка</td></tr>
+                        <tr><td>Y</td><td>/waɪ/</td><td>yellow</td><td>жёлтый</td></tr>
+                        <tr><td>Z</td><td>/zed/ (BrE)</td><td>zoo</td><td>зоопарк</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pre class="example">
+Мини-задания:
+1) Прочитать вслух каждую букву и пример.
+2) Выделить знакомые слова и перевести их без подсказки.
+3) Составить по одному предложению с тремя выбранными словами.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Трудные звуки и пары</h3>
+                <small>Используются для исправления типичных ошибок произношения</small>
+                <ul>
+                    <li>th: this /ð/ vs think /θ/</li>
+                    <li>v vs w: very — wine</li>
+                    <li>i vs iː: ship — sheep, live — leave</li>
+                    <li>æ vs e: cat — bed</li>
+                    <li>ɜː vs ɔː: girl — door</li>
+                </ul>
+                <pre class="example">
+Упражнение:
+1) Прочитать вслух пары:
+   ship — sheep, live — leave, cat — cut, very — wary.
+2) Записать русскими буквами примерную «подсказку» произношения.
+3) Найти в словаре ещё 3 слова с th и проговорить вслух.
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Words -->
+    <section id="words">
+        <h2>2. Тематический словарь (база A1)</h2>
+        <p class="section-desc">
+            Здесь собраны основные темы, на которых строится первый запас слов: семья, дом, покупки, город, еда, одежда,
+            эмоции, школа и работа. Лексика подбирается для уровня начинающего.
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="subheading">ТЕМА</div>
+                <h3>Семья и люди</h3>
+                <small>Используется в первых диалогах о себе</small>
+                <ul>
+                    <li>mother — мама</li>
+                    <li>father — папа</li>
+                    <li>parents — родители</li>
+                    <li>brother — брат</li>
+                    <li>sister — сестра</li>
+                    <li>child — ребёнок</li>
+                    <li>friend — друг</li>
+                    <li>people — люди</li>
+                    <li>neighbour — сосед</li>
+                    <li>family — семья</li>
+                </ul>
+                <pre class="example">
+My family is big.  
+I have one brother and one sister.  
+My parents live in a small town.
+                </pre>
+            </div>
+
+            <div class="card">
+                <div class="subheading">ТЕМА</div>
+                <h3>Дом, комната, вещи</h3>
+                <small>Слова для описания пространства вокруг</small>
+                <ul>
+                    <li>room — комната</li>
+                    <li>flat / apartment — квартира</li>
+                    <li>house — дом</li>
+                    <li>kitchen — кухня</li>
+                    <li>bathroom — ванная</li>
+                    <li>bed — кровать</li>
+                    <li>table — стол</li>
+                    <li>chair — стул</li>
+                    <li>window — окно</li>
+                    <li>door — дверь</li>
+                </ul>
+                <pre class="example">
+This is my room.  
+The table is near the window.  
+There is a bed and a small desk.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Город, покупки, транспорт</h3>
+                <small>Основной набор для диалогов в городе</small>
+                <ul>
+                    <li>city — город</li>
+                    <li>street — улица</li>
+                    <li>shop / store — магазин</li>
+                    <li>supermarket — супермаркет</li>
+                    <li>bus — автобус</li>
+                    <li>train — поезд</li>
+                    <li>ticket — билет</li>
+                    <li>station — станция</li>
+                    <li>price — цена</li>
+                    <li>cash / card — наличные / карта</li>
+                </ul>
+                <pre class="example">
+Excuse me, where is the bus station?  
+How much is this ticket?  
+I want to pay by card.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Еда и напитки</h3>
+                <small>Набор для раздела «Кафе и покупки»</small>
+                <ul>
+                    <li>bread — хлеб</li>
+                    <li>milk — молоко</li>
+                    <li>water — вода</li>
+                    <li>coffee — кофе</li>
+                    <li>tea — чай</li>
+                    <li>meat — мясо</li>
+                    <li>fish — рыба</li>
+                    <li>fruit — фрукты</li>
+                    <li>vegetables — овощи</li>
+                    <li>salad — салат</li>
+                </ul>
+                <pre class="example">
+I would like a coffee and a sandwich.  
+This salad is very good.  
+Do you drink tea or coffee in the morning?
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Одежда и цвета</h3>
+                <small>Полезно для магазина и описания людей</small>
+                <ul>
+                    <li>T-shirt — футболка</li>
+                    <li>shirt — рубашка</li>
+                    <li>jeans — джинсы</li>
+                    <li>jacket — куртка, пиджак</li>
+                    <li>shoes — обувь</li>
+                    <li>coat — пальто</li>
+                    <li>black — чёрный</li>
+                    <li>white — белый</li>
+                    <li>red — красный</li>
+                    <li>blue — синий</li>
+                </ul>
+                <pre class="example">
+I need a new jacket.  
+Do you have this T-shirt in blue?  
+These shoes are very comfortable.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Эмоции, время, базовые прилагательные</h3>
+                <small>Частые слова в простых рассказах</small>
+                <ul>
+                    <li>happy — счастливый</li>
+                    <li>tired — уставший</li>
+                    <li>busy — занятый</li>
+                    <li>easy — лёгкий</li>
+                    <li>difficult — сложный</li>
+                    <li>today — сегодня</li>
+                    <li>yesterday — вчера</li>
+                    <li>tomorrow — завтра</li>
+                    <li>morning — утро</li>
+                    <li>evening — вечер</li>
+                </ul>
+                <pre class="example">
+I am tired today, but happy.  
+Tomorrow is a busy day.  
+English is difficult, but interesting.
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Grammar -->
+    <section id="grammar">
+        <h2>3. Грамматика начального уровня</h2>
+        <p class="section-desc">
+            В блоке собраны опорные темы для уровня A1: to be, have got, there is / there are, Present Simple,
+            порядок слов, местоимения и базовые вопросительные конструкции.
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3>To be <span class="badge">am / is / are</span></h3>
+                <ul>
+                    <li>I am — I’m</li>
+                    <li>You are — You’re</li>
+                    <li>He / She / It is — He’s / She’s / It’s</li>
+                    <li>We / You / They are — We’re / They’re</li>
+                </ul>
+                <pre class="example">
+Утверждения:
+I am a student.  
+She is at home.  
+
+Отрицания:
+I am not busy.  
+They are not (aren't) here.  
+
+Вопросы:
+Are you a student?  
+Is he at work?
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Have got / Есть, имеется</h3>
+                <small>Очень удобная конструкция для начального уровня</small>
+                <ul>
+                    <li>I have got (I've got) — у меня есть</li>
+                    <li>He has got (He's got) — у него есть</li>
+                    <li>We have got — у нас есть</li>
+                </ul>
+                <pre class="example">
+I have got a car.  
+She has got two brothers.  
+
+Вопросы:
+Have you got a pen?  
+Has he got a sister?
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>There is / There are</h3>
+                <small>Описания комнаты, города, места</small>
+                <ul>
+                    <li>There is — есть (в единственном числе)</li>
+                    <li>There are — есть (во множественном числе)</li>
+                </ul>
+                <pre class="example">
+There is a table in the room.  
+There are three chairs in the kitchen.  
+
+Вопросы:
+Is there a bank near here?  
+Are there any shops in this street?
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Present Simple</h3>
+                <small>Обычные действия, привычки, расписание</small>
+                <ul>
+                    <li>I/you/we/they + V (go, work, live)</li>
+                    <li>He/she/it + Vs (goes, works, lives)</li>
+                    <li>Вопросы: Do / Does + подлежащее</li>
+                    <li>Отрицание: don't / doesn't</li>
+                </ul>
+                <pre class="example">
+I work every day.  
+She works in a shop.  
+
+Do you live here?  
+Does he like coffee?  
+
+I don't like fast food.  
+He doesn't watch TV.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Местоимения и порядок слов</h3>
+                <small>База, на которой строятся простые предложения</small>
+                <ul>
+                    <li>I, you, he, she, it, we, they</li>
+                    <li>my, your, his, her, its, our, their</li>
+                    <li>Схема: Кто — Что делает — Что / Где / Когда</li>
+                </ul>
+                <pre class="example">
+My brother lives in London.  
+We study English at home every evening.  
+
+Схема:
+Subject + Verb + Object + Place + Time
+I      read   books at home at night.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Вопросительные слова</h3>
+                <small>Основной набор для простого общения</small>
+                <ul>
+                    <li>What — что? какой?</li>
+                    <li>Where — где? куда?</li>
+                    <li>When — когда?</li>
+                    <li>Who — кто?</li>
+                    <li>Why — почему?</li>
+                    <li>How — как?</li>
+                    <li>How much / How many — сколько?</li>
+                </ul>
+                <pre class="example">
+Where do you live?  
+What do you do?  
+How old are you?  
+Why are you tired today?
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Dialogs -->
+    <section id="dialogs">
+        <h2>4. Диалоги по ситуациям</h2>
+        <p class="section-desc">
+            Готовые мини-сценки помогают тренировать речь. Диалоги можно читать по ролям, переписывать, заменять слова
+            и адаптировать под свои ситуации.
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Знакомство</h3>
+                <small>Базовый сценарий</small>
+                <pre class="example">
+A: Hi! What's your name?  
+B: My name is Nick. And you?  
+A: I'm Alex. Nice to meet you.  
+B: Nice to meet you too.  
+A: Where are you from?  
+B: I'm from Norway. And you?  
+A: I'm from Russia.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>В магазине одежды</h3>
+                <small>Покупка футболки</small>
+                <pre class="example">
+A: Hello. Can I help you?  
+B: Yes, I need a T-shirt.  
+A: What size do you need?  
+B: Medium, please.  
+A: Here you are. Do you like this one?  
+B: Yes, it's nice. How much is it?  
+A: It's 25 euros.  
+B: OK, I'll take it.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>В супермаркете</h3>
+                <small>Поиск товара</small>
+                <pre class="example">
+A: Excuse me, where is the bread?  
+B: It's over there, next to the milk.  
+A: Thank you. And where can I find coffee?  
+B: Coffee is on the top shelf on the right.  
+A: Great, thanks a lot.  
+B: You're welcome.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>В кафе</h3>
+                <small>Заказ еды и напитков</small>
+                <pre class="example">
+A: Hello. Can I have a coffee and a sandwich, please?  
+B: Sure. Anything else?  
+A: Yes, a bottle of water, please.  
+B: Still or sparkling?  
+A: Still, please.  
+B: Here you are. Enjoy your meal!
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>В транспорте</h3>
+                <small>Дорога и билеты</small>
+                <pre class="example">
+A: Excuse me, does this bus go to the city centre?  
+B: Yes, it does. You need to get off at the third stop.  
+A: Thank you. Can I buy a ticket on the bus?  
+B: Yes, you can. It's 3 euros.  
+A: Okay, thank you very much.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>В отеле</h3>
+                <small>Заселение</small>
+                <pre class="example">
+A: Good evening. I have a reservation.  
+B: Good evening. What's your name?  
+A: Nick Ivanov.  
+B: Yes, here it is. A single room for three nights.  
+A: That's right.  
+B: Your room is on the second floor. Here is your key.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Короткая переписка</h3>
+                <small>Пример диалога в чате</small>
+                <pre class="example">
+A: Hi! Are you free this evening?  
+B: Hi! Yes, I am.  
+A: Do you want to watch a movie?  
+B: Sounds good. What time?  
+A: At 7 p.m.  
+B: Great, see you then!
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>У врача</h3>
+                <small>Очень простой вариант</small>
+                <pre class="example">
+A: Good morning. What's the problem?  
+B: I have a headache and a sore throat.  
+A: Do you have a fever?  
+B: Yes, a little.  
+A: You need to rest and drink a lot of water.
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Flashcards -->
+    <section id="flashcards">
+        <h2>5. Карточки слов</h2>
+        <p class="section-desc">
+            Карточки можно использовать каждый день: нажимается слово — появляется перевод. Набор легко расширяется
+            в коде, здесь представлен пример базового мини-пака.
+        </p>
+
+        <div class="card">
+            <h3>Интерактивные карточки (пример набора)</h3>
+            <div id="flashcardsContainer" class="flashcards-grid">
+                <!-- Карточки добавляются скриптом -->
+            </div>
+            <div class="flashcard-hint">
+                Нажать по карточке — переворот. В массив flashcardsData внизу кода можно добавить любые свои слова.
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Plan -->
+    <section id="plan">
+        <h2>6. План обучения на 3 месяца</h2>
+        <p class="section-desc">
+            Структура курса распределяется на 12 недель. Каждая неделя имеет свой фокус: база, бытовые темы,
+            грамматика, повторение и маленькие проекты.
+        </p>
+
+        <div class="two-col">
+            <div class="card">
+                <h3>Общая таблица по неделям</h3>
+                <div class="table-wrap">
+                    <table class="plan-table">
+                        <thead>
+                        <tr>
+                            <th>Неделя</th>
+                            <th>Фокус</th>
+                            <th>Главные задачи</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Алфавит и базы</td>
+                            <td>Алфавит, чтение, to be, 50 слов о семье и доме.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Семья и дом</td>
+                            <td>Описание семьи и комнаты, there is/there are, ещё 50 слов.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Город и транспорт</td>
+                            <td>Город, улицы, транспорт, диалоги на улице и в автобусе.</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Покупки и кафе</td>
+                            <td>Магазин, еда, кафе, цены, простые диалоги.</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Present Simple</td>
+                            <td>Привычки, работа, расписание, 20 частотных глаголов.</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Глаголы и эмоции</td>
+                            <td>Описания настроения, свободного времени, мини-тексты.</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Отель и путешествия</td>
+                            <td>Отель, аэропорт, бронирования, повторение слов.</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Здоровье и самочувствие</td>
+                            <td>Простые фразы у врача, описание самочувствия.</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Повторение A1</td>
+                            <td>Повторение лексики и грамматики, исправление ошибок.</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Мини-проекты</td>
+                            <td>Тексты “О себе”, “О дне”, “О городе”.</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>Устная практика</td>
+                            <td>Пересказ диалогов, ответы на вопросы, чтение вслух.</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>Итоговое закрепление</td>
+                            <td>Тест, повторение слабых мест, перечень достигнутого.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Пример дня (шаблон)</h3>
+                <small>Можно использовать несколько раз в неделю</small>
+                <ul>
+                    <li>1) 10–15 минут — повторение старых карточек.</li>
+                    <li>2) 10 минут — 5–10 новых слов по теме недели.</li>
+                    <li>3) 10 минут — одно упражнение по грамматике.</li>
+                    <li>4) 10 минут — чтение мини-диалога вслух.</li>
+                    <li>5) 5 минут — запись 2–3 своих предложений по теме.</li>
+                </ul>
+                <pre class="example">
+Чек-лист прогресса:
+[ ] Алфавит читается уверенно.  
+[ ] Минимум 150–200 активных слов.  
+[ ] Есть готовый рассказ о себе (5–7 предложений).  
+[ ] Понимание простых диалогов на слух.  
+[ ] Умение задать вопрос о цене, времени и направлении.
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Mistakes -->
+    <section id="mistakes">
+        <h2>7. Типичные ошибки и тренировка</h2>
+        <p class="section-desc">
+            Заключительный блок собирает типичные ошибки начинающих и предлагает простые варианты исправления. Формируется
+            привычка сразу заменять неверные фразы на рабочие.
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Грамматические ошибки</h3>
+                <ul>
+                    <li><strong>I very like</strong> → I like it very much.</li>
+                    <li><strong>He go to work</strong> → He goes to work.</li>
+                    <li><strong>She don't like coffee</strong> → She doesn't like coffee.</li>
+                    <li><strong>I no understand</strong> → I don't understand.</li>
+                    <li><strong>He live in London</strong> → He lives in London.</li>
+                </ul>
+                <pre class="example">
+Задание:
+Исправить предложения:
+1) She go to school every day.  
+2) I no speak English.  
+3) He don't work on Sunday.  
+4) We likes this city.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Лексика и варианты “русского английского”</h3>
+                <ul>
+                    <li><strong>I have 20 years</strong> → I am 20 years old.</li>
+                    <li><strong>Very big city</strong> (без контекста) → It is a very big city.</li>
+                    <li><strong>He is work</strong> → He works / He is at work.</li>
+                    <li><strong>More better</strong> → better.</li>
+                    <li><strong>Can I to...?</strong> → Can I ...?</li>
+                </ul>
+                <pre class="example">
+Задание:
+Переписать:
+1) I have 25 years.  
+2) This more better.  
+3) He is work in bank.
+                </pre>
+            </div>
+
+            <div class="card">
+                <h3>Мини-тест</h3>
+                <small>Маленький блок для самопроверки</small>
+                <ul>
+                    <li>Написать 5 предложений о себе в Present Simple.</li>
+                    <li>Сделать 5 вопросов к другу (Where, What, Why, When, How).</li>
+                    <li>Составить диалог “В магазине” из 6–8 реплик.</li>
+                    <li>Исправить 10 предложений с ошибками (можно взять сверху).</li>
+                </ul>
+                <pre class="example">
+Пример:
+I live in Oslo. I work from Monday to Friday.  
+In the evening I read books or watch films in English.
+                </pre>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    Starter English Case — расширенный продукт по английскому для начинающих. Контент можно дополнять новыми словами,
+    диалогами и упражнениями прямо в коде страницы.
+</footer>
+
+<script>
+    // Пример расширенного набора карточек
+    const flashcardsData = [
+        // Семья
+        { front: "mother", back: "мама" },
+        { front: "father", back: "папа" },
+        { front: "parents", back: "родители" },
+        { front: "sister", back: "сестра" },
+        { front: "brother", back: "брат" },
+        { front: "family", back: "семья" },
+        // Дом
+        { front: "room", back: "комната" },
+        { front: "kitchen", back: "кухня" },
+        { front: "bathroom", back: "ванная" },
+        { front: "window", back: "окно" },
+        { front: "door", back: "дверь" },
+        // Город и транспорт
+        { front: "city", back: "город" },
+        { front: "street", back: "улица" },
+        { front: "bus", back: "автобус" },
+        { front: "ticket", back: "билет" },
+        { front: "station", back: "станция" },
+        // Еда
+        { front: "bread", back: "хлеб" },
+        { front: "water", back: "вода" },
+        { front: "coffee", back: "кофе" },
+        { front: "tea", back: "чай" },
+        { front: "salad", back: "салат" },
+        // Глаголы
+        { front: "to go", back: "идти, ехать" },
+        { front: "to like", back: "нравиться" },
+        { front: "to live", back: "жить" },
+        { front: "to work", back: "работать" },
+        { front: "to study", back: "учиться" },
+        // Прилагательные
+        { front: "happy", back: "счастливый" },
+        { front: "tired", back: "уставший" },
+        { front: "busy", back: "занятый" },
+        { front: "easy", back: "лёгкий" },
+        { front: "difficult", back: "сложный" }
+    ];
+
+    const container = document.getElementById("flashcardsContainer");
+
+    flashcardsData.forEach((card) => {
+        const el = document.createElement("div");
+        el.className = "flashcard";
+        el.innerHTML = `
+            <div class="flashcard-front">${card.front}</div>
+            <div class="flashcard-back">${card.back}</div>
+        `;
+        el.addEventListener("click", () => {
+            el.classList.toggle("flipped");
+        });
+        container.appendChild(el);
+    });
+</script>
+</body>
+</html>
